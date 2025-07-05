@@ -1,7 +1,11 @@
 import Dashboard from '../components/Dashboard';
+import PayIDHeader from '../components/PayIDHeader';
 
-const DashboardPage = () => {
-  return <Dashboard />;
-};
-
-export default DashboardPage;
+export default function DashboardPage() {
+  return (
+    <>
+      <PayIDHeader />
+      <Dashboard />
+    </>
+  );
+}
