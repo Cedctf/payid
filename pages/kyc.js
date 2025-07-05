@@ -1,8 +1,23 @@
 import { motion } from "framer-motion";
+import { User, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 import BiometricBackground from "../components/landing/BiometricBackground";
 import PayIDHeader from "../components/PayIDHeader";
 
 export default function KYCPage() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-[#030712] p-4">
       {/* Background Grid Pattern */}
@@ -104,9 +119,69 @@ export default function KYCPage() {
             transformOrigin: "top center",
           }}
         >
-          <div className="text-center text-white mt-8">
-            <h1>KYC Page</h1>
-          </div>
+          {/* Card Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="text-center mb-8 mt-8"
+          >
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl mb-4 shadow-lg">
+              <User className="h-8 w-8 text-white" />
+            </div>
+            <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80 mb-2">Sign up</h1>
+          </motion.div>
+
+          {/* Form */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="space-y-6"
+          >
+            {/* Email Field */}
+            <div>
+              <label className="block text-sm font-medium text-blue-200/80 mb-2">
+                Email
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-400/60" />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="your.email@gmail.com"
+                  className="w-full pl-11 pr-4 py-3 bg-blue-500/10 border border-blue-400/20 rounded-xl text-white placeholder-blue-300/50 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/40 backdrop-blur-sm transition-all duration-200"
+                />
+              </div>
+            </div>
+
+            {/* Password Field */}
+            <div>
+              <label className="block text-sm font-medium text-blue-200/80 mb-2">
+                Password
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-400/60" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  placeholder="••••••••••"
+                  className="w-full pl-11 pr-12 py-3 bg-blue-500/10 border border-blue-400/20 rounded-xl text-white placeholder-blue-300/50 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/40 backdrop-blur-sm transition-all duration-200"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-400/60 hover:text-blue-300 transition-colors"
+                >
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                </button>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Card Shadow/Depth Effect */}
