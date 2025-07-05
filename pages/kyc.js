@@ -46,12 +46,72 @@ export default function KYCPage() {
         />
       </div>
 
-      {/* Main Container */}
-      <div className="relative w-full max-w-md z-40">
-        <div className="text-center text-white">
-          <h1>KYC Page - Step 2: Biometric Background & Glass Effects</h1>
+      {/* Main KYC Card Container */}
+      <motion.div
+        initial={{ opacity: 0, y: 50, rotateX: 15 }}
+        animate={{ opacity: 1, y: 0, rotateX: 0 }}
+        transition={{ 
+          duration: 1,
+          ease: [0.25, 0.4, 0.25, 1],
+        }}
+        className="relative w-full max-w-md z-40"
+        style={{
+          perspective: "1000px",
+        }}
+      >
+        {/* Long Lanyard Extension - From Top of Screen */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 top-0 z-10">
+          {/* Lanyard extends from top of viewport */}
+          <div 
+            className="w-12 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900 rounded-lg shadow-lg border border-slate-700/50 relative"
+            style={{
+              height: 'calc(50vh + 35px)', // Extends from top and reaches card
+              marginTop: '-50vh' // Starts from top of viewport
+            }}
+          >
+          </div>
         </div>
-      </div>
+
+        {/* Black hole - positioned independently between card and lanyard */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 w-26 h-6 bg-black rounded-xl border border-slate-800 z-5" 
+             style={{ top: 'calc(2vh + 3px)' }}></div>
+
+        {/* Glass Card */}
+        <motion.div
+          animate={{
+            y: [0, 3, 0],
+            rotateX: [0, 1, 0],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: "easeInOut",
+          }}
+          className="relative bg-blue-500/10 backdrop-blur-xl border border-blue-400/20 rounded-3xl p-8 shadow-2xl"
+          style={{
+            background: `
+              linear-gradient(135deg, 
+                rgba(59, 130, 246, 0.1) 0%, 
+                rgba(34, 211, 238, 0.08) 50%, 
+                rgba(99, 102, 241, 0.1) 100%
+              )
+            `,
+            boxShadow: `
+              0 25px 50px -12px rgba(59, 130, 246, 0.3),
+              0 0 0 1px rgba(59, 130, 246, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1)
+            `,
+            transformOrigin: "top center",
+          }}
+        >
+          <div className="text-center text-white mt-8">
+            <h1>KYC Page</h1>
+          </div>
+        </motion.div>
+
+        {/* Card Shadow/Depth Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-3xl transform translate-y-4 -z-10 blur-sm" style={{ top: '140px' }} />
+      </motion.div>
     </div>
   );
 } 
