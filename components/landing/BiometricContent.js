@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Eye, Scan } from "lucide-react";
+import Link from "next/link";
 
 export default function BiometricContent() {
   const fadeUpVariants = {
@@ -67,10 +68,12 @@ export default function BiometricContent() {
           animate="visible"
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <button className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors duration-200 flex items-center gap-2">
-            <Scan className="h-5 w-5" />
-            Start Scan
-          </button>
+          <Link href="/kyc">
+            <button className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors duration-200 flex items-center gap-2">
+              <Scan className="h-5 w-5" />
+              Start Scan
+            </button>
+          </Link>
           <button className="px-8 py-3 bg-transparent border border-blue-400/30 text-blue-300 hover:bg-blue-500/10 rounded-lg font-medium transition-colors duration-200">
             Learn More
           </button>
